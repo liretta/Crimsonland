@@ -14,4 +14,47 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FrameworkRelease_x64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="FrameworkRelease_x64.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\avatar.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\bullet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\circle.tga" />
+    <Image Include="data\enemy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\reticle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\avatar2.JPG">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
