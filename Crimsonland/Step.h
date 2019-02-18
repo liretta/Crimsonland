@@ -1,76 +1,20 @@
-#pragma once
 #include "Framework.h"
 #include <math.h>
 #include <vector>
+#include "Sprites.h"
 
 using std::vector;
-using std::move;
-
-struct Point
-{
-	int x;
-	int y;
-
-	Point(int m_x = 0, int m_y = 0) : x(m_x), y(m_y) {};
-};
-
 
 bool MoveEnemy(Sprite& target, Sprite& curObject);
 bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint);
 vector <Point> FindNeighbors(Sprite& obj);
 bool isCollusion(Point& obj1, int obj1W, int obj1H, Point& obj2, int obj2W, int obj2H);
 
-
-class Sprite
+int Diference(Point& a, Point&b)
 {
-protected:
-	Point curPosition;
-	Point curCenter;
+	return abs(a.x - b.x) + abs(a.y - b.y);
+}
 
-public:
-	virtual void Init()
-	{
-		curPosition.x = 0;
-		curPosition.y = 0;
-	}
-	Point GetCurPosition() const { return curPosition; }
-	int GetX() const { return curPosition.x; }
-	int GetY() const { return curPosition.y; }
-	void SetCurPosition(Point& newPosition)
-	{
-		curPosition = newPosition;
-		curCenter.x = newPosition.x / 2;
-		curCenter.y = newPosition.y / 2;
-	}
-
-	void SetX(int x) { curPosition.x = x; } //add checking for screenSize
-	void SetY(int y) { curPosition.y = y; } //add cheking for screenSize
-
-};
-
-
-class Avatar: public Sprite
-{
-public:
-	void AvatarInit()
-	{
-		int x = 0, y = 0;
-		getScreenSize(x, y);
-		curPosition.x = x/2;
-		curPosition.y = y/2;
-	}
-	friend bool MoveEnemy(Sprite& target, Sprite& curObject);
-
-};
-
-class Enemy : public Sprite
-{
-	friend bool MoveEnemy(Sprite& target, Sprite& curObject);
-};
-
-//function for looking the next step for enemy
-//return true if enemy has variatn to move, return false if enemy kill the player
-//
 bool MoveEnemy(Sprite& target, Sprite& curObject)
 {
 	Point newStep;
@@ -83,12 +27,6 @@ bool MoveEnemy(Sprite& target, Sprite& curObject)
 		return false;
 };
 
-int Diference(Point& a, Point&b)
-{
-	return abs(a.x - b.x) + abs(a.y - b.y);
-}
-
-
 //return true if we can move? return false if one of the nearest neighbors is avatar (game over)
 bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint)
 {
@@ -96,7 +34,7 @@ bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint)
 	bool isAvatarNeer = false;
 	vector <Point> vNeighbors = FindNeighbors(curObject);
 
-	
+
 	Point targetPoint = target.GetCurPosition();
 	int targetW = 0, targetH = 0;
 	Sprite *pSprite = &target;
@@ -110,7 +48,7 @@ bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint)
 	getScreenSize(w, h);
 	int bestCost = w * h, stepCost = 0;
 	newPoint = vNeighbors[0];
-	for (int i = 0; i<vNeighbors.size(); ++i)
+	for (int i = 0; i < vNeighbors.size(); ++i)
 	{
 		isAvatarNeer = isCollusion(targetPoint, targetW, targetH, vNeighbors[i], objW, objH);
 		if (isAvatarNeer)
@@ -138,7 +76,7 @@ vector <Point> FindNeighbors(Sprite& obj)
 	//lookin all neighbors: from top-left to left
 	vector <int> forX = { -wObj, 0, wObj, wObj, wObj, 0, -wObj, -wObj };
 	vector <int> forY = { -hObj, -hObj, -hObj, 0, hObj, hObj, hObj, 0 };
-	
+
 	int wScreen = 0, hScreen = 0;
 	getScreenSize(wScreen, hScreen);
 
@@ -160,7 +98,7 @@ vector <Point> FindNeighbors(Sprite& obj)
 bool isCollusion(Point& obj1, int obj1W, int obj1H, Point& obj2, int obj2W, int obj2H)
 {
 	bool xColl = false, yColl = false;
-	   
+
 	if ((obj1.x + obj1W >= obj2.x) && (obj1.x <= obj2.x + obj2W))
 		xColl = true;
 	if ((obj1.y + obj1H >= obj2.y) && (obj1.y <= obj2.y + obj2H))

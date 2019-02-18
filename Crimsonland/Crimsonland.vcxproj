@@ -118,13 +118,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Step.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Avatar.h" />
+    <ClInclude Include="Avatar.cpp" />
     <ClInclude Include="defines.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="MyFramework.h" />
-    <ClInclude Include="Sprites.hpp" />
+    <ClInclude Include="Sprites.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FrameworkRelease_x64.dll" />

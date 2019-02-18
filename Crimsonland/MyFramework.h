@@ -5,9 +5,8 @@
 #include <direct.h>
 #include "Framework.h"
 #include "defines.h"
-//#include "Sprites.hpp"
+#include "Sprites.h"
 
-int x = 10, y = 10;
 /* Test Framework realization */
 class MyFramework : public Framework {
 
@@ -32,7 +31,7 @@ public:
 			return false;
 
 		avatar = createSprite(path);
-		//avatar->Init();
+		avatar->Init();
 		
 		return true;
 	}
@@ -47,9 +46,7 @@ public:
 		//call function MoveEnemy with all avatar and all enemies
 		//if(MoveEnemy()
 		drawTestBackground();
-		int w = 0, h = 0;
-		getSpriteSize(avatar, w, h);
-		//int x = 10, y = 10;
+		int x = avatar->GetX(), y = avatar->GetY();
 		drawSprite(avatar, x, y);
 		return false;
 	}
@@ -64,12 +61,12 @@ public:
 
 	virtual void onKeyPressed(FRKey k) 
 	{
-		/*int x = avatar -> GetY();
-		int y = avatar-> GetY();*/
+		int x = avatar -> GetX();
+		int y = avatar-> GetY();
 		switch (k)
 		{
 		case FRKey::RIGHT:
-			x+= 10;
+			x+=10;
 			break;
 		case FRKey::LEFT:
 			x-=10;
@@ -85,13 +82,14 @@ public:
 		default:
 			break;
 		}
-		/*avatar->SetX(x);
-		avatar->SetY(y);*/
+		avatar->SetX(x);
+		avatar->SetY(y);
 	}
+
 	virtual void onKeyReleased(FRKey k)
 	{
-		/*int x = avatar->GetX();
-		int y = avatar->GetY();*/
+		int x = avatar->GetX();
+		int y = avatar->GetY();
 		switch (k)
 		{
 		case FRKey::RIGHT:
@@ -111,7 +109,7 @@ public:
 		default:
 			break;
 		}
-		/*avatar->SetX(x);
-		avatar->SetY(y);*/
+		avatar->SetX(x);
+		avatar->SetY(y);
 	}
 };
