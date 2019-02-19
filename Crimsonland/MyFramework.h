@@ -6,49 +6,50 @@
 #include "Framework.h"
 #include "defines.h"
 #include "Sprites.h"
+#include "Game.h"
 
+Game *playGame;
 /* Test Framework realization */
 class MyFramework : public Framework {
 
 public:
-	Sprite* avatar;
-	
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen)
 	{
 		width = 550;
 		height = 500;
 		fullscreen = false;
+		playGame = new Game;
 	}
 
 	virtual bool Init()
-	{
-		char full[_MAX_PATH];
-		const char * path;
-		if (_fullpath(full, resourceAvatar, _MAX_PATH) != NULL)
-			path = full;
+	{	
+		bool check = false;
+		if (playGame != nullptr)
+			check = playGame->InitGameObject();
 		else
-			return false;
-
-		avatar = createSprite(path);
-		avatar->Init();
-		
-		return true;
+			check = false;
+		return check;
 	}
 
 	virtual void Close()
 	{
 		//destroySprite
+		delete playGame;
 	}
 
 	virtual bool Tick()
 	{
-		//call function MoveEnemy with all avatar and all enemies
-		//if(MoveEnemy()
-		drawTestBackground();
+		/*drawTestBackground();
 		int x = avatar->GetX(), y = avatar->GetY();
-		drawSprite(avatar, x, y);
-		return false;
+		drawSprite(avatar, x, y);*/
+		/*if (playGame->MoveEmenies())
+		{
+			playGame->DrawGameObject();
+			return false;
+		}
+		else*/
+			return true;
 	}
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) {
@@ -61,55 +62,11 @@ public:
 
 	virtual void onKeyPressed(FRKey k) 
 	{
-		int x = avatar -> GetX();
-		int y = avatar-> GetY();
-		switch (k)
-		{
-		case FRKey::RIGHT:
-			x+=10;
-			break;
-		case FRKey::LEFT:
-			x-=10;
-			break;
-		case FRKey::DOWN:
-			y+=10;
-			break;
-		case FRKey::UP:
-			y-=10;
-			break;
-		case FRKey::COUNT:
-			break;
-		default:
-			break;
-		}
-		avatar->SetX(x);
-		avatar->SetY(y);
+		//playGame->MoveAvatar(k);
 	}
 
 	virtual void onKeyReleased(FRKey k)
 	{
-		int x = avatar->GetX();
-		int y = avatar->GetY();
-		switch (k)
-		{
-		case FRKey::RIGHT:
-			x += 10;
-			break;
-		case FRKey::LEFT:
-			x -= 10;
-			break;
-		case FRKey::DOWN:
-			y += 10;
-			break;
-		case FRKey::UP:
-			y -= 10;
-			break;
-		case FRKey::COUNT:
-			break;
-		default:
-			break;
-		}
-		avatar->SetX(x);
-		avatar->SetY(y);
+		//playGame->MoveAvatar(k);
 	}
 };

@@ -1,6 +1,5 @@
 #pragma once
 
-
 #if defined(FRAMEWORK_PROJECT)
 #define FRAMEWORK_API __declspec(dllexport)
 #else

@@ -6,6 +6,6 @@
 class Avatar : public Sprite
 {
 public:
-	void AvatarInit();
+	void Init();
 	friend bool MoveEnemy(Sprite& target, Sprite& curObject);
 };

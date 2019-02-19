@@ -16,7 +16,7 @@ protected:
 	//Point curCenter;
 
 public:
-	void Init();
+	virtual void Init();
 	Point GetCurPosition() const;
 	int GetX() const;
 	int GetY() const; 

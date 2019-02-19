@@ -1,10 +1,10 @@
+#pragma once
 #include "Sprites.h"
-
 
 void Sprite::Init()
 {
-	curPosition.x = 50;
-	curPosition.y = 50;
+	curPosition.x = 0;
+	curPosition.y = 0;
 }
 
 Point Sprite::GetCurPosition() const 

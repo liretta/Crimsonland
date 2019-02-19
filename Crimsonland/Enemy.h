@@ -5,6 +5,8 @@
 
 class Enemy : public Sprite
 {
+public:
+	void Init();
 	friend bool MoveEnemy(Sprite& target, Sprite& curObject);
 };
 
