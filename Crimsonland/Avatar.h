@@ -1,11 +1,11 @@
 #pragma once
 #include "Framework.h"
-#include "Sprites.h"
+#include "BaseGameObject.h"
 #include "Step.h"
 
-class Avatar : public Sprite
+class Avatar : public GameObject
 {
 public:
-	void Init();
+	Avatar();
 	friend bool MoveEnemy(Sprite& target, Sprite& curObject);
 };

@@ -2,10 +2,11 @@
 #include "Framework.h"
 #include <math.h>
 #include <vector>
-#include "Sprites.h"
+#include "BaseGameObject.h"
 
 using std::vector;
 
+//TODO: - cheng all function to game object
 bool MoveEnemy(Sprite& target, Sprite& curObject);
 bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint);
 vector <Point> FindNeighbors(Sprite& obj);

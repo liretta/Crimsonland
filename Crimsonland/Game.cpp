@@ -3,51 +3,23 @@
 
 Game::Game()
 {
-	avatar = nullptr;
-	enemy = nullptr;
-}
-
-bool Game::InitGameObject()
-{
-	//init Avatar
-	char fullAvatar[_MAX_PATH];
-	const char * path;
-	if (_fullpath(fullAvatar, resourceAvatar, _MAX_PATH) != NULL)
-		path = fullAvatar;
-	else
-		return false;
 	avatar = new Avatar;
-	avatar = (Avatar*)createSprite(path);
-	avatar->Init();
-
-	//init Enemy
-	//TODO: create vector by enemies
-	char fullEnemy[_MAX_PATH];
-	const char * path2;
-	if (_fullpath(fullEnemy, resourceEnemy, _MAX_PATH) != NULL)
-		path2 = fullEnemy;
-	else
-		return false;
-	enemy = (Enemy*)createSprite(path2);
-	enemy->Init();
-
-	//here ill be bullets initialization
-	return true;
+	enemy = new Enemy;
 }
 
 void Game::DrawGameObject()
 {
 	drawTestBackground();
 	int x = avatar->GetX(), y = avatar->GetY();
-	drawSprite(avatar, x, y);
+	drawSprite(avatar->sprite, x, y);
 	x = enemy->GetX(), y = enemy->GetY();
-	drawSprite(enemy, x, y);
+	drawSprite(enemy->sprite, x, y);
 
 	//for the future:
 	//for (int i =0; i< enemies.size(); ++i)
 	//{
 	//	x = enemies[i]->GetX(), y = enemies[i]->GetY();
-	//	drawSprite(enemy[i], x,y);
+	//	drawSprite(enemy[i]->sprite, x,y);
 };
 void Game::MoveAvatar(const FRKey &k)
 {
@@ -78,9 +50,9 @@ void Game::MoveAvatar(const FRKey &k)
 bool Game::MoveEmenies() { return true; };
 void Game::DeleteObjects()
 {
-	destroySprite(avatar);
+	destroySprite(avatar->sprite);
 	avatar = nullptr;
-	destroySprite(enemy);
+	destroySprite(enemy->sprite);
 	enemy = nullptr;
 	//for the future:
 	//for (int i = 0; i<enemies.size(); ++i)
@@ -88,4 +60,10 @@ void Game::DeleteObjects()
 	//enemies.erase();
 }
 
-Game::~Game() {};
+Game::~Game() 
+{
+	if (avatar != nullptr)
+		delete avatar;
+	if (enemy != nullptr)
+		delete enemy;
+};

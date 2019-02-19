@@ -1,7 +1,7 @@
 #pragma once
 #include "Framework.h"
 #include "defines.h"
-#include "Sprites.h"
+#include "BaseGameObject.h"
 #include "Avatar.h"
 #include "Enemy.h"
 #include "Step.h"
@@ -18,13 +18,12 @@
 class Game
 {
 private:
-	Sprite* avatar;
-	Sprite* enemy;
+	Avatar* avatar;
+	Enemy* enemy;
 	//vector <Enemy*> enemies;
 	//vector <Bullet> cartridges;
 public:
 	Game();
-	bool InitGameObject(); //Init avatar, enemies and buulets from path
 	void DrawGameObject(); //called draw-functions for backgroung, avatar, enemies
 	void MoveAvatar(const FRKey &k); //
 	bool MoveEmenies();

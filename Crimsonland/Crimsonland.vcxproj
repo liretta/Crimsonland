@@ -121,7 +121,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Sprites.cpp" />
+    <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="Step.cpp" />
     <ClCompile Include="Step.h" />
   </ItemGroup>
@@ -133,7 +133,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="MyFramework.h" />
-    <ClInclude Include="Sprites.h" />
+    <ClInclude Include="BaseGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FrameworkRelease_x64.dll" />

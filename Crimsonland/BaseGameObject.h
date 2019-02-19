@@ -9,14 +9,15 @@ struct Point
 	Point(int m_x = 0, int m_y = 0) : x(m_x), y(m_y) {};
 };
 
-class Sprite
+class GameObject
 {
 protected:
 	Point curPosition;
 	//Point curCenter;
 
 public:
-	virtual void Init();
+	Sprite* sprite;
+	GameObject();
 	Point GetCurPosition() const;
 	int GetX() const;
 	int GetY() const; 

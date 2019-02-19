@@ -1,44 +1,43 @@
 #pragma once
-#include "Sprites.h"
+#include "BaseGameObject.h"
 
-void Sprite::Init()
+GameObject::GameObject() 
 {
-	curPosition.x = 0;
-	curPosition.y = 0;
+	sprite = nullptr;
 }
 
-Point Sprite::GetCurPosition() const 
+Point GameObject::GetCurPosition() const
 	{ return curPosition; }
 
-int Sprite::GetX() const 
+int GameObject::GetX() const
 	{ return curPosition.x; }
 
-int Sprite::GetY() const 
+int GameObject::GetY() const
 	{ return curPosition.y; }
 	
-void Sprite::SetCurPosition(Point& newPosition)
+void GameObject::SetCurPosition(Point& newPosition)
 	{
 		curPosition = newPosition;
 		//curCenter.x = newPosition.x / 2;
 		//curCenter.y = newPosition.y / 2;
 	}
 
-void Sprite::SetX(int x) 
+void GameObject::SetX(int x)
 { 
 	int w = 0, h = 0, wSprite=0, hSprite=0;
 	getScreenSize(w, h);
-	getSpriteSize(this, wSprite, hSprite);
+	getSpriteSize(sprite, wSprite, hSprite);
 	if (x >= 0 && x <= w - wSprite)
 		curPosition.x = x;
 	else
 		curPosition.x = x < 0 ? 0: w - wSprite;
 } 
 
-void Sprite::SetY(int y) 
+void GameObject::SetY(int y)
 { 
 	int w = 0, h = 0, wSprite = 0, hSprite = 0;
 	getScreenSize(w, h);
-	getSpriteSize(this, wSprite, hSprite);
+	getSpriteSize(sprite, wSprite, hSprite);
 	if (y >= 0 && y <= h - hSprite)
 		curPosition.y = y;
 	else

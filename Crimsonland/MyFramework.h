@@ -5,7 +5,6 @@
 #include <direct.h>
 #include "Framework.h"
 #include "defines.h"
-#include "Sprites.h"
 #include "Game.h"
 
 Game *playGame;
