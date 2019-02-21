@@ -6,6 +6,10 @@
 #include "Enemy.h"
 #include "Step.h"
 
+class GameObject;
+class Avatar;
+class Enemy;
+
 //TODO:
 //create game-class - it will be global object
 //members - pointers to avatar, enemy (then will be enemy's vector), bullet

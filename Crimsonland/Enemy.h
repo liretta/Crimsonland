@@ -7,6 +7,6 @@ class Enemy : public GameObject
 {
 public:
 	Enemy();
-	friend bool MoveEnemy(Sprite& target, Sprite& curObject);
+	//friend bool MoveEnemy(Sprite& target, Sprite& curObject);
 };
 

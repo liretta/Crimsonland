@@ -7,9 +7,8 @@
 using std::vector;
 
 //TODO: - cheng all function to game object
-bool MoveEnemy(Sprite& target, Sprite& curObject);
-bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint);
-vector <Point> FindNeighbors(Sprite& obj);
+bool LookingForNextStep(GameObject* target, GameObject* curObject, Point &newPoint);
+vector <Point> FindNeighbors(GameObject* obj);
 bool isCollusion(Point& obj1, int obj1W, int obj1H, Point& obj2, int obj2W, int obj2H);
 
 int Diference(Point& a, Point&b);

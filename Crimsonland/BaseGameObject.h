@@ -1,6 +1,8 @@
 #pragma once
 #include "Framework.h"
 
+class Sprite;
+
 struct Point
 {
 	int x;

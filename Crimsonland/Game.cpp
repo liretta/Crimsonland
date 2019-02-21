@@ -47,7 +47,18 @@ void Game::MoveAvatar(const FRKey &k)
 	avatar->SetY(y);
 }
 
-bool Game::MoveEmenies() { return true; };
+bool Game::MoveEmenies() 
+{ 
+	Point newStep;
+	if (LookingForNextStep(avatar, enemy, newStep))
+		{
+			enemy->SetCurPosition(newStep);
+			return true;
+		}
+		else
+			return false;
+};
+
 void Game::DeleteObjects()
 {
 	destroySprite(avatar->sprite);

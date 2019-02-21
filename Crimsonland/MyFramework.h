@@ -18,17 +18,17 @@ public:
 		width = 550;
 		height = 500;
 		fullscreen = false;
-		playGame = new Game;
+		//playGame = new Game;
 	}
 
 	virtual bool Init()
 	{	
-		bool check = false;
+		/*bool check = false;
 		if (playGame != nullptr)
 			check = playGame->InitGameObject();
 		else
-			check = false;
-		return check;
+			check = false;*/
+		return true;
 	}
 
 	virtual void Close()
@@ -39,6 +39,11 @@ public:
 
 	virtual bool Tick()
 	{
+		if (!playGame->MoveEmenies())
+			return true;
+		else
+			playGame->DrawGameObject();
+		return false;
 		/*drawTestBackground();
 		int x = avatar->GetX(), y = avatar->GetY();
 		drawSprite(avatar, x, y);*/
@@ -48,7 +53,7 @@ public:
 			return false;
 		}
 		else*/
-			return true;
+			//return true;
 	}
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) {
@@ -61,11 +66,11 @@ public:
 
 	virtual void onKeyPressed(FRKey k) 
 	{
-		//playGame->MoveAvatar(k);
+		playGame->MoveAvatar(k);
 	}
 
 	virtual void onKeyReleased(FRKey k)
 	{
-		//playGame->MoveAvatar(k);
+		playGame->MoveAvatar(k);
 	}
 };

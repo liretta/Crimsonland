@@ -2,6 +2,8 @@
 #include "Avatar.h"
 #include "defines.h"
 
+
+
 Avatar::Avatar()
 {
 	//TODO: try-catch block if result by _fullpath == null

@@ -122,6 +122,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="BaseGameObject.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Step.cpp" />
     <ClCompile Include="Step.h" />
   </ItemGroup>

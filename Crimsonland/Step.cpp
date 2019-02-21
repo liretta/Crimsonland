@@ -1,47 +1,73 @@
 #pragma once
+#include "Framework.h"
+#include "Avatar.h"
+#include "Enemy.h"
 #include "Step.h"
 
 using std::vector;
 
-int Diference(Point& a, Point&b);
-bool MoveEnemy(Sprite& target, Sprite& curObject);
-bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint);
-vector <Point> FindNeighbors(Sprite& obj);
-bool isCollusion(Point& obj1, int obj1W, int obj1H, Point& obj2, int obj2W, int obj2H);
+//1. Looking for nearest neighbors cell on screen of cur enemy
+//2. looking best step
 
 int Diference(Point& a, Point&b)
 {
 	return abs(a.x - b.x) + abs(a.y - b.y);
 }
 
-bool MoveEnemy(Sprite& target, Sprite& curObject)
+bool isCollusion(Point& obj1, int obj1W, int obj1H, Point& obj2, int obj2W, int obj2H)
 {
-	Point newStep;
-	if (LookingForNextStep(target, curObject, newStep))
-	{
-		curObject.SetCurPosition(newStep);
-		return true;
-	}
-	else
-		return false;
-};
+	bool xColl = false, yColl = false;
 
-//return true if we can move? return false if one of the nearest neighbors is avatar (game over)
-bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint)
+	if ((obj1.x + obj1W >= obj2.x) && (obj1.x <= obj2.x + obj2W))
+		xColl = true;
+	if ((obj1.y + obj1H >= obj2.y) && (obj1.y <= obj2.y + obj2H))
+		yColl = true;
+
+	return (xColl&&yColl);
+}
+
+vector <Point> FindNeighbors(GameObject* obj)
+{
+	vector <Point> vNeighbors;
+	Point tempP, objPoint = obj->GetCurPosition();
+	int wObj = 0, hObj = 0;
+	getSpriteSize(obj->sprite, wObj, hObj);
+
+	//lookin all neighbors: from top-left to left
+	vector <int> forX = { -wObj, 0, wObj, wObj, wObj, 0, -wObj, -wObj };
+	vector <int> forY = { -hObj, -hObj, -hObj, 0, hObj, hObj, hObj, 0 };
+
+	int wScreen = 0, hScreen = 0;
+	getScreenSize(wScreen, hScreen);
+
+	int n = forX.size();
+	for (int i = 0; i < n; ++i)
+	{
+		tempP = objPoint;
+		if (objPoint.x + forX[i] >= 0 && objPoint.x + forX[i] <= wScreen)
+			tempP.x = objPoint.x + forX[i];
+
+		if (objPoint.y + forY[i] >= 0 && objPoint.y + forY[i] <= hScreen)
+			tempP.y = objPoint.y + forY[i];
+		vNeighbors.push_back(tempP);
+	}
+
+	return(move(vNeighbors));
+}
+
+//return true if we can move enemy, return false if one of the nearest neighbors is avatar (game over)
+bool LookingForNextStep(GameObject* target, GameObject* curObject, Point &newPoint)
 {
 	//1. lookign nearest neighbors
 	bool isAvatarNeer = false;
 	vector <Point> vNeighbors = FindNeighbors(curObject);
 
-
-	Point targetPoint = target.GetCurPosition();
+	Point targetPoint = target->GetCurPosition();
 	int targetW = 0, targetH = 0;
-	Sprite *pSprite = &target;
-	getSpriteSize(pSprite, targetW, targetH);
+	getSpriteSize(target->sprite, targetW, targetH);
 
 	int objW = 0, objH = 0;
-	pSprite = &curObject;
-	getSpriteSize(pSprite, objW, objH);
+	getSpriteSize(curObject->sprite, objW, objH);
 
 	int w = 0, h = 0;
 	getScreenSize(w, h);
@@ -64,44 +90,3 @@ bool LookingForNextStep(Sprite& target, Sprite& curObject, Point &newPoint)
 
 
 
-vector <Point> FindNeighbors(Sprite& obj)
-{
-	vector <Point> vNeighbors;
-	Point tempP, enemyPoint = obj.GetCurPosition();
-	int wObj = 0, hObj = 0;
-	Sprite *pSprite = &obj;
-	getSpriteSize(pSprite, wObj, hObj);
-
-	//lookin all neighbors: from top-left to left
-	vector <int> forX = { -wObj, 0, wObj, wObj, wObj, 0, -wObj, -wObj };
-	vector <int> forY = { -hObj, -hObj, -hObj, 0, hObj, hObj, hObj, 0 };
-
-	int wScreen = 0, hScreen = 0;
-	getScreenSize(wScreen, hScreen);
-
-	int n = forX.size();
-	for (int i = 0; i < n; ++i)
-	{
-		tempP = enemyPoint;
-		if (enemyPoint.x + forX[i] >= 0 && enemyPoint.x + forX[i] <= wScreen)
-			tempP.x = enemyPoint.x + forX[i];
-
-		if (enemyPoint.y + forY[i] >= 0 && enemyPoint.y + forY[i] <= hScreen)
-			tempP.y = enemyPoint.y + forY[i];
-		vNeighbors.push_back(tempP);
-	}
-
-	return(move(vNeighbors));
-}
-
-bool isCollusion(Point& obj1, int obj1W, int obj1H, Point& obj2, int obj2W, int obj2H)
-{
-	bool xColl = false, yColl = false;
-
-	if ((obj1.x + obj1W >= obj2.x) && (obj1.x <= obj2.x + obj2W))
-		xColl = true;
-	if ((obj1.y + obj1H >= obj2.y) && (obj1.y <= obj2.y + obj2H))
-		yColl = true;
-
-	return (xColl&&yColl);
-}
